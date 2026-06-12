@@ -39,7 +39,7 @@ solar_theme <- bs_theme(
 ui <- page_navbar(
   title = span(
     bs_icon("sun-fill", style = "color:#f4c430; margin-right:8px;"),
-    "Solar PV Present Value Explorer"
+    "Solar Project: Present-Value Explorer"
   ),
   theme    = solar_theme,
   fillable = FALSE,
@@ -67,7 +67,7 @@ ui <- page_navbar(
              Use your borrowing cost or expected investment return —
              e.g. 4–5% for a savings account, 7–10% for equities."
           ),
-          min = 1, max = 12, value = 5, step = 0.5, post = "%"
+          min = 1, max = 10, value = 4, step = 0.5, post = "%"
         ),
         
         sliderInput(
@@ -75,10 +75,11 @@ ui <- page_navbar(
           tooltip(
             trigger = span("Electricity price growth ",
                            bs_icon("info-circle", size = "0.85em")),
-            "Annual rate at which electricity prices are assumed to rise.
-             The proposal uses ~4.4%. The US historical average is 2–3%."
+            "Average annual rate at which electricity prices are assumed to rise.
+             Pure Solar uses ~4.4%. The US historical average is 2–3%.
+            Note:  Homer thinks Pure Solar's forecasts could be a bit high."
           ),
-          min = 0, max = 10, value = 4.4, step = 0.1, post = "%"
+          min = 2, max = 6, value = 3.5, step = 0.1, post = "%"
         ),
         
         sliderInput(
@@ -87,7 +88,8 @@ ui <- page_navbar(
             trigger = span("Heat-pump conversion cost ",
                            bs_icon("info-circle", size = "0.85em")),
             "Estimated cost to convert from the current gas system to a
-             heat-pump system. Paid in cash at year 0."
+             heat-pump system. Paid in cash at year 0. Note:  We'll
+            revise or drop this slider when we get a professional estimate."
           ),
           min = 5000, max = 15000, value = 10000,
           step = 500,
@@ -167,6 +169,8 @@ ui <- page_navbar(
             showcase = bs_icon("graph-up"),
             theme    = value_box_theme(bg = "#1a7a4a", fg = "white"),
             p("savings minus total costs",
+              style="font-size:0.78rem;opacity:0.85;margin:0;"),
+            p("(this is the key figure!)",
               style="font-size:0.78rem;opacity:0.85;margin:0;")
           )
         ),
